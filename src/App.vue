@@ -1,32 +1,37 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <Header v-if="!$route.path.toString().includes('/dashboard')" />
+    <router-view />
+    <Footer v-if="!$route.path.toString().includes('/dashboard')" />
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import Vue from 'vue';
+import Header from '@/components/layouts/Header.vue';
+import Footer from '@/components/layouts/Footer.vue';
 
-#nav {
-  padding: 30px;
-}
+export default Vue.extend({
+  name: 'App',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  data: () => ({
+    //
+  }),
+  components:{
+    Header,
+    Footer
+  }
+});
+</script>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style lang="scss" scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600&family=Roboto:wght@100;300;400&display=swap');
+  @import "src/styles/style";
+
+  body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box !important;
+    font-family: 'Mulish', sans-serif;
+  }
 </style>

@@ -1,0 +1,15 @@
+.container{
+    padding-top: 130px;
+}
+
+.dashboard-main-container{
+    background-color: $secondary-lighter;
+    height: 100%;
+    border-radius: 25px;
+}
+//This is for 2 buttons in the bottom of components
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

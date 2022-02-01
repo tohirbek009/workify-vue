@@ -1,0 +1,10 @@
+.custom--v-checkbox::v-deep{
+  margin-top: 0;
+  .v-input--selection-controls__input{
+    height: 15px !important;
+    margin-right: 5px !important;
+    input{
+      opacity: 1 !important;
+    }
+  }
+}
