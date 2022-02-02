@@ -56,6 +56,7 @@ export default {
       let validate = new ValidateService();
       this.valid = validate.SkillsLanguuagesValidate(this.languagesData, this.skillsData) && validate.JobpreferenceValidate();
       if(this.valid){
+
         this.isLoading = true;
         let companyUser = JSON.parse(localStorage.getItem('user'));
         Object.assign(this.JobpostViewModel, this.jobPreferenceViewModel);

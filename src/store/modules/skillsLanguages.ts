@@ -63,7 +63,7 @@ const mutations = {
             yearsOfExperience: 0,
             skillId: 0,
             skillName: '',
-            talentId: JSON.parse(localStore)?.talentId
+            talentId: (JSON.parse(localStore)?.talentId) || 0
         })
     },
     removeLanguage(state:any, id:number) {

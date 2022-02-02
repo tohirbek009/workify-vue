@@ -21,7 +21,7 @@
           </v-avatar>
 
           <div class="information">
-            <div class="main-text name">Odilkuziyev Tokhirbek</div>
+            <div class="main-text name">{{talent.firstName}}</div>
             <div class="speciality">Frontend Developer</div>
           </div>
         </v-sheet>
@@ -29,7 +29,7 @@
       <v-col cols="12" sm="6" class="d-flex flex-column align-end pa-0">
         <div class="d-flex">
           <img src="/assets/icons/location.svg"/>
-          <div class="location ml-3">Toshkent, Uzbekistan</div>
+          <div class="location ml-3">{{ talent.user.city.name }}, {{ talent.user.city.country.name }}</div>
         </div>
         <div class="salary">$1.250 USD</div>
       </v-col>
@@ -73,15 +73,10 @@
             label
             class="pa-3 mr-2 mb-2"
             color="vChipColor"
+            v-for="skill in skills"
+            :key="skill.skillId"
         >
-          Figma (2 years)
-        </v-chip>
-        <v-chip
-            label
-            class="pa-3 mr-2 mb-2"
-            color="vChipColor"
-        >
-          Figma (2 years)
+          {{skill.skillName}} ({{skill.yearsOfExperience}} years)
         </v-chip>
       </v-col>
       <v-col v-if="isOpenViewProfile" cols="12" sm="6" class="pa-0">
@@ -90,8 +85,10 @@
             label
             class="pa-3 mr-2 mb-2"
             color="vChipColor"
+            v-for="language in languages"
+            :key="language.languageId"
         >
-          English (Intermediate)
+          {{ language.languageName }} ({{language.languageLevel}})
         </v-chip>
         <v-chip
             label
@@ -178,13 +175,41 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "TalentProfileView",
+
+  props:{
+    talent: Object,
+  },
 
   data() {
     return {
       isOpenViewProfile: false,
+      skills: [],
+      languages: [],
     }
+  },
+
+  async created() {
+    let user = JSON.parse(localStorage.getItem('user'));
+    const skill = await axios({
+      method: 'get',
+      url: `https://localhost:7285/api/talentskill?TalentId=${this.talent.id}`,
+      headers: {
+        "Authorization": `Bearer ${user.token}`
+      }
+    })
+    this.skills = skill.data.data;
+    const language = await axios({
+      method: 'get',
+      url: `https://localhost:7285/api/talentlanguage?TalentId=${this.talent.id}`,
+      headers: {
+        "Authorization": `Bearer ${user.token}`
+      }
+    })
+    this.languages = language.data.data;
   }
 }
 </script>

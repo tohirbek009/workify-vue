@@ -46,7 +46,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" sm="6" v-if="!editPage">
+      <v-col cols="12" sm="6">
         <!--        Email input:-->
         <div class="input-field">
           <label for="email">Email</label>
@@ -69,7 +69,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" sm="6" v-if="!editPage">
+      <v-col cols="12" sm="6">
         <!--        Password input:-->
         <div class="input-field">
           <label for="password">Password</label>

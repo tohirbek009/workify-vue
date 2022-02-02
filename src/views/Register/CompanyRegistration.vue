@@ -86,7 +86,6 @@
               color="#CCD2E3"
               dense
               height="51"
-              :disabled="editPage"
           ></v-text-field>
         </div>
       </v-col>

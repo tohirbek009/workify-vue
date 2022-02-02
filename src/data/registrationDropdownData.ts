@@ -4,7 +4,7 @@ const registrationDropdownData :any = {
     itemsSpeciality: [],
     itemsSkills: [],
     itemsLanguage: [],
-    itemsIndustry: [{value: 1, text:'chd'}],
+    itemsIndustry: [],
     itemsCity: [],
     itemsCountry: [],
 

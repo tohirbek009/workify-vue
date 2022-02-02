@@ -107,6 +107,7 @@ export default {
       jobPreferenceViewModel,
       employmentTypeData,
       workplaceTypeData,
+      matchedJobs: [],
 
       minSalaryRules: [
         v => !!v || "Salary is required.",

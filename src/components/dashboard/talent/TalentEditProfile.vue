@@ -66,7 +66,7 @@
 
 <script>
 import axios from "axios";
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 
 // Components Imports:
 import TalentRegistrationA from "../../../views/Register/TalentRegistrationA";
@@ -76,7 +76,6 @@ import FormJobType from "@/components/form/FormJobType";
 
 // Data imports:
 import talentViewModel from "@/data/talentRegistration/talentViewModel";
-import skillsData from "@/data/skillsData/skillsData";
 import jobPreferenceViewModel from "@/data/jobPreferenceViewModel";
 
 export default {
@@ -84,7 +83,6 @@ export default {
   data: () => ({
     talentViewModel,
     jobPreferenceViewModel,
-    skillsData,
     watchChange: false,
     isLoading: false,
     aboutUser: '',
@@ -118,8 +116,7 @@ export default {
       this.watchChange = !this.watchChange;
       this.talentViewModel.user.aboutMe = this.aboutUser;
       let talentId = JSON.parse(localStorage.getItem("user")).talentId;
-
-      console.log(this.talentViewModel)
+      console.log('TalentViewModel1: ', this.talentViewModel)
 
       this.isLoading = true;
       await axios({
@@ -130,18 +127,39 @@ export default {
           "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user")).token}`
         }
       });
+      console.log('TalentViewModel2: ', this.talentViewModel)
       this.isLoading = false;
     },
+
+    async submitSkillsExpertise(){
+      console.log("Updated skill: ", this.skillsData)
+
+      this.isLoading = true;
+      await axios({
+        method: 'put',
+        url : `https://localhost:7285/api/talentskill`,
+        data : this.skillsData,
+        headers : {
+          "Authorization": `Bearer ${JSON.parse(localStorage.getItem("user")).token}`
+        }
+      });
+      this.isLoading = false;
+
+    },
+
+    ...mapActions(['getUserData'])
   },
 
   computed:{
-    ...mapGetters(['userData', 'talentSkillsData'])
+    ...mapGetters(['userData', 'talentSkillsData', 'skillsData'])
   },
 
-  mounted() {
+  async mounted() {
+    await this.getUserData();
     Object.assign(this.talentViewModel, this.userData)
     Object.assign(this.skillsData, this.talentSkillsData)
-  }
+  },
+
 }
 </script>
 

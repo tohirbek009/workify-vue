@@ -45,11 +45,12 @@ export default {
       let company = JSON.parse(localStorage.getItem('user'));
 
       this.isLoading = true;
+      this.companyViewModel.user.aboutMe = this.aboutUser;
 
       await axios({
         method: 'put',
-        url : `https://localhost:7285/api/company/${company.companyId}`,
-        data : this.talentViewModel,
+        url : `https://localhost:7285/api/company`,
+        data : this.companyViewModel,
         headers : {
           "Authorization": `Bearer ${company.token}`
         }

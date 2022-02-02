@@ -38,7 +38,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <div class="about-user">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet explicabo maiores molestiae quo recusandae sequi soluta vero? Ab assumenda beatae, consectetur corporis cumque ea enim expedita explicabo facere harum, ipsam magnam maiores natus placeat possimus qui quis saepe sed soluta tempore vel vero voluptatem voluptatibus? Ad animi nulla suscipit voluptatum!</div>
+              <div class="about-user">{{userData.user.aboutMe}}</div>
             </v-col>
           </v-row>
         </v-col>

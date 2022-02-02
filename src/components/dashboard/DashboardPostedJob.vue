@@ -170,23 +170,23 @@
       <v-row v-if="isOpenJopView">
         <v-col cols="12">
           <v-chip
+              v-for="skill in skills"
+              :key="skill.id"
               label
               class="pa-3 mr-2 mb-2"
               color="vChipColor"
-              v-for="n in 6"
-              :key="n"
           >
-            Figma (2 years)
+            {{skill.skillName}} ({{skill.yearsOfExperience}} years)
           </v-chip>
-<!--          <v-chip-->
-<!--              label-->
-<!--              class="pa-3 mr-2 mb-2"-->
-<!--              color="vChipColor"-->
-<!--              v-for="language in jobPostLanguagesData"-->
-<!--              :key="language.languageId"-->
-<!--          >-->
-<!--            {{ language.languageName }} ({{language.languageLevel}})-->
-<!--          </v-chip>-->
+          <v-chip
+              label
+              class="pa-3 mr-2 mb-2"
+              color="vChipColor"
+              v-for="language in jobPostLanguagesData"
+              :key="language.languageId"
+          >
+            {{ language.languageName }} ({{language.languageLevel}})
+          </v-chip>
         </v-col>
       </v-row>
 
@@ -245,6 +245,16 @@ export default {
     }
   },
 
+  watch:{
+    job:{
+      handler(){
+        this.employmentType = getEmploymentType(this.job?.employmentType);
+        this.workplaceType = getWorkplaceType(this.job?.workplaceType)
+      },
+      deep: true
+    }
+  },
+
   computed:{
     ...mapGetters(['userData','jobPostLanguagesData'])
   },
@@ -252,11 +262,6 @@ export default {
   mounted() {
     this.employmentType = getEmploymentType(this.job?.employmentType);
     this.workplaceType = getWorkplaceType(this.job?.workplaceType)
-    // if(this.jobPostLanguagesData){
-    //   this.jobPostLanguagesData.forEach((el) => {
-    //     el.languageLevel = getLanguageLevel(el.languageLevel);
-    //   })
-    // }
   }
 }
 </script>

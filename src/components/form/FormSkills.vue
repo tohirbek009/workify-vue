@@ -277,8 +277,8 @@ export default {
   },
 
   mounted() {
-    this.skillsData[0].talentId = JSON.parse(localStorage.getItem('user'))?.talentId;
-    this.languagesData[0].talentId = JSON.parse(localStorage.getItem('user'))?.talentId;
+    this.skillsData[0].talentId = (JSON.parse(localStorage.getItem('user'))?.talentId) || 0;
+    this.languagesData[0].talentId = (JSON.parse(localStorage.getItem('user'))?.talentId) || 0;
   }
 }
 </script>

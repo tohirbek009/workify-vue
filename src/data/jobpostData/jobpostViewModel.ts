@@ -6,6 +6,7 @@ const JobpostViewModel = {
     workplaceType: 1,
     minimumSalary: 0,
     maximumSalary: 0,
+    jobPostStatus: 1,
     city: {
         id: 0,
         name: "",
@@ -15,7 +16,6 @@ const JobpostViewModel = {
         }
     },
     description: "",
-    cityId: 0,
     companyId: 0
 }
 

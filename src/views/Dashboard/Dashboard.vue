@@ -27,6 +27,7 @@
               width="160"
               class="ml-5 rounded-pill"
               @click="$router.push('/dashboard/post-job')"
+              v-if="userType === 1"
           >
             Post a Job
           </v-btn>
