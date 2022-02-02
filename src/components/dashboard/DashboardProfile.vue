@@ -138,7 +138,7 @@ export default {
     await this.getUserData();
     if(this.userData.user.userType === 2){
       await this.getTalentSkills();
-      await this.getTalentJobpreferences();
+      // await this.getTalentJobpreferences();
       await this.getTalentLanguages();
     }
 

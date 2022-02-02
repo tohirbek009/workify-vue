@@ -18,18 +18,18 @@ const getters = {
 
 const actions = {
     async getUserData({ commit }:{commit: any}) {
-        const talentUser:any = localStorage.getItem("user");
-        if(JSON.parse(talentUser).userType === 2){
-            const response = await axios.get(`https://localhost:7285/api/talent/${JSON.parse(talentUser).talentId}`, {
+        const user:any = localStorage.getItem("user");
+        if(JSON.parse(user).userType === 2){
+            const response = await axios.get(`https://localhost:7285/api/talent/${JSON.parse(user).talentId}`, {
                 headers: {
-                    "Authorization": `Bearer ${JSON.parse(talentUser).token}`
+                    "Authorization": `Bearer ${JSON.parse(user).token}`
                 }
             })
             commit("setUser", response.data.data)
-        }if(JSON.parse(talentUser).userType === 1){
-            const response = await axios.get(`https://localhost:7285/api/company/${JSON.parse(talentUser).companyId}`, {
+        }if(JSON.parse(user).userType === 1){
+            const response = await axios.get(`https://localhost:7285/api/company/${JSON.parse(user).companyId}`, {
                 headers: {
-                    "Authorization": `Bearer ${JSON.parse(talentUser).token}`
+                    "Authorization": `Bearer ${JSON.parse(user).token}`
                 }
             })
             commit("setUser", response.data.data)
@@ -61,7 +61,7 @@ const actions = {
 
     async getTalentJobpreferences ({commit}: {commit:any}){
         const talentUser:any = localStorage.getItem("user");
-        const responseJobPreference = await axios.get(`https://localhost:7285/api/jobpreference/${JSON.parse(talentUser).talentId}`, {
+        const responseJobPreference = await axios.get(`https://localhost:7285/api/jobpreference?TalentId=${JSON.parse(talentUser).talentId}`, {
             headers:{
                 "Authorization": `Bearer ${JSON.parse(talentUser).token}`
             }
@@ -85,11 +85,11 @@ const actions = {
                 default: return "";
             }
         }
-        responseJobPreference.data.data.employmentType = getEmploymentType(responseJobPreference.data.data.employmentType)
-        responseJobPreference.data.data.workplaceType = getWorkplaceType(responseJobPreference.data.data.workplaceType)
-        responseJobPreference.data.data.minimumSalary = (responseJobPreference.data.data.minimumSalary).toFixed(2);
+        responseJobPreference.data.data[0].employmentType = getEmploymentType(responseJobPreference.data.data.employmentType)
+        responseJobPreference.data.data[0].workplaceType = getWorkplaceType(responseJobPreference.data.data.workplaceType)
+        responseJobPreference.data.data[0].minimumSalary = (responseJobPreference.data.data.minimumSalary).toFixed(2);
 
-        commit("setTalentJobpreferences", responseJobPreference.data.data)
+        commit("setTalentJobpreferences", responseJobPreference.data.data[0])
     }
 
 }
